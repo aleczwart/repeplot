@@ -1,17 +1,19 @@
-Package: asremlpvp
+Package: asremlREplot
 Type: Package
-Title: Plot asreml model variance parameters
+Title: Plot asreml model random effects parameter estimates
 Version: 0.0.1
 Date: 2016-01-21
 Author: Alexander Zwart
 Maintainer: Alexander Zwart <Alec.Zwart@csiro.au>
-Description: Provides a function, 'pvp' which plots fitted variance
-    parameters for one or two asreml models - the latter allowing
-    assessment of the changes in variance parameters between models.
+Description: Provides an asreml method, 'replot.asreml' which plots 
+    fitted random effects parameter estimates for one or two asreml
+    models - the latter allowing assessment of the changes in
+    variance parameters between models.
 License: GPL-3 + file LICENSE
 LazyLoad: yes
 LazyData: yes
 Imports:
+    dplyr,
     ggplot2,
     asreml
 RoxygenNote: 5.0.1.9000
