@@ -33,6 +33,15 @@ summary(a0)$varcomp[,c(1,2,5)]
 summary(a1)$varcomp[,c(1,2,5)]
 
 
+
+replot <- function(x,...) UseMethod("replot")
+
+replot.default <- function(x,...) {
+  stop("\n\n asremlREplot: no method is available for this object class\n\n")
+}
+
+
+
 ##' Plot the random effects parameter estimates from one or two fitted
 ##' \code{\link{asreml}} models.  If two models (termed the 'current' and
 ##' 'previous' models) are specified, the plot compares the parameter
@@ -266,16 +275,19 @@ replot.asreml <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
 
 ## blue:  #0072B2
 
-replot.asreml(a1,a0)
+replot(a1,a0)
 
-replot.asreml(a1,a1)  ## Hah! nice.  Better check how that happens though...
+replot(a1,a0)
 
-replot.asreml(a0,a1)
+replot(a1,a1)  ## Hah! nice.  Better check how that happens though...
 
-replot.asreml(a1)
+replot(a0,a1)
 
-replot.asreml(a0)
+replot(a1)
 
+replot(a0)
+
+replot(1)
 
 stop()
 
