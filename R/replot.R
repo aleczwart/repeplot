@@ -1,4 +1,6 @@
 
+## Function replot
+##
 ##' Plot the random effects parameter estimates from one or two fitted
 ##' \code{\link{asreml}} models.  If two models (termed the 'current' and
 ##' 'previous' models) are specified, the plot compares the parameter
