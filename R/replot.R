@@ -60,13 +60,13 @@
 ##' details section for more.
 ##' @param gammas logical: Should the plot display 'gamma' values or
 ##' @param size numeric: The size parameter for plotting points.
-##' Equivalent to the \code{\link{geom_point()}} '\code{size}'
+##' Equivalent to the \code{\link{geom_point}} '\code{size}'
 ##' parameter.
 ##' @param lwd numeric: width parameter for the line segments that
 ##' indicate changes in parameters common to the current and previous
-##' models.  Equivalent to the \code{\link{geom_segment()}}
+##' models.  Equivalent to the \code{\link{geom_segment}}
 ##' '\code{size}' parameter.
-##' @param tritanope logical: The default colors used by \code{replot)
+##' @param tritanopia logical: The default colors used by \code{replot}
 ##' should (I hope!) suit non-colourblind users, as well as those with
 ##' from protanopia and deuteranopia. Tritanopia-friendly colors can
 ##' be obtained by setting \code{tritanopia=TRUE}.  Default is FALSE.
@@ -75,9 +75,11 @@
 ##' @param rlines logical: Display dashed vertical lines passing
 ##' through the residual variance parameter estimates? Default is
 ##' TRUE.
-##' @return A \pkg{ggplot2)-package \code{ggplot) object.
+##' @return A \pkg{ggplot2}-package \code{ggplot} object.
 ##' @author Alexander Zwart (alec.zwart at csiro.au)
 ##' @export
+##' @import ggplot2
+##' @import asreml
 ##'
 replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                           tritanopia=FALSE,zline=TRUE,rlines=TRUE)
