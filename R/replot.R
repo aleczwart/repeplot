@@ -194,7 +194,7 @@ replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                                   size=size*1.3,
                                   shape="|")
           ## size=size*1.3, shape="|" is not ideal, but it will do for
-          ## now.  The unicode option is nicer, but its not clear that
+          ## now.  The unicode option is nicer, but it's not clear that
           ## the symbol will be available to all users...
         }
       }  ## End handling of 'added'
@@ -233,7 +233,7 @@ replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                                   shape="|",
                                   size=size*1.3)
           ## size=size*1.3, shape="|" is not ideal, but it will do for
-          ## now.  The unicode option is nicer, but its not clear that
+          ## now.  The unicode option is nicer, but it's not clear that
           ## the symbol will be available to all users...
         }
       }  ## End handling of 'removed'
@@ -260,17 +260,30 @@ replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                                   size=size,
                                   color="#0072B2")
         ##
-        if (any(inboth$constraint=="Boundary")) {
-          inboth_b <- inboth[inboth$constraint=="Boundary",]
+        if (any(inboth$constraint.x=="Boundary")) {
+          inboth_b_x <- inboth[inboth$constraint.x=="Boundary",]
           plt <- plt + geom_point(aes_string(x=ifelse(gammas,
-                                                 "gamma",
-                                                 "component"),
+                                                 "gamma.x",
+                                                 "component.x"),
                                              y="Term"),
-                                  data=inboth_b,
+                                  data=inboth_b_x,
                                   size=size*1.3,
                                   shape="|")
           ## size=size*1.3, shape="|" is not ideal, but it will do for
-          ## now.  The unicode option is nicer, but its not clear that
+          ## now.  The unicode option is nicer, but it's not clear that
+          ## the symbol will be available to all users...
+        }
+        if (any(inboth$constraint.y=="Boundary")) {
+          inboth_b_y <- inboth[inboth$constraint.y=="Boundary",]
+          plt <- plt + geom_point(aes_string(x=ifelse(gammas,
+                                                 "gamma.y",
+                                                 "component.y"),
+                                             y="Term"),
+                                  data=inboth_b_y,
+                                  size=size*1.3,
+                                  shape="|")
+          ## size=size*1.3, shape="|" is not ideal, but it will do for
+          ## now.  The unicode option is nicer, but it's not clear that
           ## the symbol will be available to all users...
         }
       }  ## End handling of 'inboth'
