@@ -1,4 +1,8 @@
 
+## Hex #DBD100 is an orange colour that may suffice for all viewers as
+## a better substitute for the green I am using...
+
+
 ## Function replot
 ##
 ##' Plot the random effects parameter estimates from one or two fitted
@@ -111,6 +115,7 @@
 ##' @export
 ##' @import ggplot2
 ##' @import asreml
+##' @import dplyr
 ##'
 replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                           tritanopia=FALSE,zline=TRUE,rlines=TRUE)
@@ -165,7 +170,7 @@ replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
     ##
     if (!is.null(added))
       {
-        ## re color argument: if there is no previous model, plot
+        ## Re color argument: if there is no previous model, plot
         ## points in blue ("#0072B2").  Else, plot in green
         ## ("#009E73"), or orange ("#E69F00") for those with
         ## tritanopia.
@@ -176,9 +181,6 @@ replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                                            y="Term"),
                                 data=added,
                                 size=size,
-###                                color=ifelse(tritanopia,
-###                                    "#E69F00",
-###                                    "#009E73"))
                                 color=ifelse(is.null(prev),
                                     "#0072B2",
                                     ifelse(tritanopia,"#E69F00",
