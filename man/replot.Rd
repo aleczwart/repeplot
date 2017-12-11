@@ -5,18 +5,19 @@
 \title{Plot \pkg{asreml} random model parameters}
 \usage{
 replot(curr, prev = NULL, gammas = TRUE, size = 6, lwd = 2,
-  tritanopia = FALSE, zline = TRUE, rlines = TRUE)
+  zline = TRUE, rlines = TRUE, bw = FALSE, pointcol = ifelse(bw,
+  "grey50", "#0072B2"), altcol = ifelse(bw, "black", "#E69F00"))
 }
 \arguments{
 \item{curr}{\code{\link{asreml}} object: The 'current'
 \code{\link{asreml}} model for which the estimated random effects
 parameters are to be plotted.}
 
-\item{prev}{\code{\link{asreml}} object, or NULL: If a 'previous'
-\code{\link{asreml}} model is specified via \code{prev}, the plot
-will compare random effects parameters between the previous and
-current models.  Default is \code{NULL}.  See the Details section
-for more.}
+\item{prev}{\code{\link{asreml}} object, or \code{NULL}: If a
+'previous' \code{\link{asreml}} model is specified via
+\code{prev}, the plot will compare random effects parameters
+between the previous and current models.  Default is \code{NULL}.
+See the Details section for more.}
 
 \item{gammas}{logical: Should the plot display 'gamma' values or
 actual components?  Default is \code{TRUE}. See the Details
@@ -31,26 +32,37 @@ indicating changes in parameters common to the current and
 previous models.  Equivalent to the \code{\link{geom_segment}}
 '\code{size}' parameter.}
 
-\item{tritanopia}{logical: The default colors used by
-\code{replot} should (I hope!) be protanopia- and
-deuteranopia-friendly. Tritanopia-friendly colors can be obtained
-by setting \code{tritanopia=TRUE}.}
-
 \item{zline}{logical: Display a grey vertical line (the 'zero
-line') passing through the x-axis origin? Default is TRUE.}
+line') passing through the x-axis origin? Default is \code{TRUE}.}
 
 \item{rlines}{logical: Display dashed vertical line(s) passing
 through the residual variance parameter estimate(s)? Default is
-TRUE.}
+\code{TRUE}.}
+
+\item{bw}{logical: Produce a black-and-white version of the plot?
+Default is FALSE.  If \code{bw=TRUE}, parameters present in both
+models are plotted as grey points and parameters in only one model
+are plotted as unfilled circles.}
+
+\item{pointcol}{Specifies the point colour for parameters present
+in both models.  Default is \code{"#0072B2"} (a shade of blue), or
+\code{"grey50"} when \code{bw=TRUE}.}
+
+\item{altcol}{Specifies the point colour for parameters present in
+only one model.  Default is \code{"#E69F00"} (a shade of orange)
+when \code{bw=FALSE}.  When \code{bw=TRUE}, this parameter
+controls the colour of the point \emph{outline}, and the default
+value is \code{"black"}.}
 }
 \value{
 A \pkg{ggplot2}-package \code{ggplot} object.
 }
 \description{
-Plot the random effects parameter estimates from one or two fitted
-\code{\link{asreml}} models.  If two models (termed the 'current' and
-'previous' models) are specified, the plot compares the parameter
-estimates from the current model to those from the previous.
+Function \code{replot} plots the random effects parameter
+estimates from one or two fitted \code{\link{asreml}} models.  If
+two models (termed the 'current' and 'previous' models) are
+specified, the plot compares the parameter estimates from the
+current model to those from the previous.
 }
 \details{
 Function \code{replot} plots the random effects parameter
@@ -66,17 +78,18 @@ TRUE (the default).
 
 Regarding 'gamma' values: when a linear mixed model contains a
 single residual variance \code{\link{asreml}} will parameterise
-other variances in the model relative to the residual variance.
-These scaled variances are referred to as 'gamma' parameters.  The
-\code{varcomp} component of the object returned by
-\code{\link{summary.asreml}} reports these gamma values, along
+other variances in the model \emph{relative} to the residual
+variance.  The resulting scale factors are referred to as 'gamma'
+parameters.  The \code{varcomp} component of the object returned
+by \code{\link{summary.asreml}} reports these gamma values, along
 with the unscaled component values, and \code{replot} allows you
-to plot either via the argument \code{gammas} (default value
-TRUE).  No such scaling is performed when a model contains more
-than one residual variance parameter, and the reported gamma
-estimates are identical to the unscaled component estimates.  For
-further details on how \code{\link{asreml}} parameterises the
-linear mixed model, see the \pkg{asreml} package manual.
+to plot either, via the argument \code{gammas} (default value
+TRUE).  Note that no such scaling is performed when a model
+contains more than one residual variance parameter, and the
+reported gamma estimates are identical to the unscaled component
+estimates.  For further details on how \code{\link{asreml}}
+parameterises the linear mixed model, see the \pkg{asreml} package
+manual.
 
 Parameters that lie 'on the boundary' (and hence indicated by
 "Boundary" in the \code{varcomp$condition} component of the
@@ -96,17 +109,18 @@ a cross, highlighting their absence from the current model.
 
 For parameters present in both models, the values for the current
 model are plotted, and horizontal line segments are used to
-indicate how these parameters have changed between the previous and
-current models.  Note that if parameter changes are very small,
-the line segments may be too short to be seen.
+indicate how these parameters have changed between the previous
+and current models.  Note that these line segments are plotted
+behind the corresponding points, and hence if parameter changes
+are very small, the line segments may be too short to be seen.
 
 Caveat: note that a change in the random effects model
 specification between 'previous' and 'current' models, can
-sometimes result in an equivalent parameter being given different
-labels by \code{\link{asreml}} between the models.  \code{replot}
-cannot detect such cases, and hence will plot the affected
-parameter as two distinct parameters - one removed from the
-previous model, the other added to the current.
+sometimes result in an equivalent parameter being given
+\emph{different labels} by \code{\link{asreml}} between the two
+models.  \code{replot} cannot detect such cases, and hence will
+plot the affected parameter as two distinct parameters - one
+removed from the previous model, the other added to the current.
 
 Not all random effects parameters are variances, and as such may
 have different scales to the variances.  Autocorrelation
@@ -118,8 +132,8 @@ values to see the estimates clearly, you can do so using the usual
 \pkg{ggplot2} \code{xlim} function syntax,
 e.g. \code{replot(a1,a0) + xlim(-1,1)}.
 
-\code{replot} requires that the \pkg{dplyr} and \pkg{ggplot2}
-packages be installed.  \code{replot} returns a
+\code{replot} requires that the \pkg{asreml}, \pkg{dplyr} and
+\pkg{ggplot2} packages be installed.  \code{replot} returns a
 \code{\link{ggplot}} object, and this object can be further
 modified using the usual \pkg{ggplot2} package
 syntax. \code{replot} uses the \code{\link{theme_bw}} theme by

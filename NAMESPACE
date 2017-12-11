@@ -2,5 +2,4 @@
 
 export(replot)
 import(asreml)
-import(dplyr)
 import(ggplot2)
