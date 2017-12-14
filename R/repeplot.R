@@ -1,13 +1,13 @@
 
-## Function replot
+## Function repeplot
 ##
-##' Function \code{replot} plots the random effects parameter
+##' Function \code{repeplot} plots the random effects parameter
 ##' estimates from one or two fitted \code{\link{asreml}} models.  If
 ##' two models (termed the 'current' and 'previous' models) are
 ##' specified, the plot compares the parameter estimates from the
 ##' current model to those from the previous.
 ##'
-##' Function \code{replot} plots the random effects parameter
+##' Function \code{repeplot} plots the random effects parameter
 ##' estimates from one or two fitted \code{\link{asreml}} model
 ##' objects.  The random effects parameter labels that are used are
 ##' those given in the \code{varcomp} component of the object returned
@@ -24,7 +24,7 @@
 ##' variance.  The resulting scale factors are referred to as 'gamma'
 ##' parameters.  The \code{varcomp} component of the object returned
 ##' by \code{\link{summary.asreml}} reports these gamma values, along
-##' with the unscaled component values, and \code{replot} allows you
+##' with the unscaled component values, and \code{repeplot} allows you
 ##' to plot either, via the argument \code{gammas} (default value
 ##' \code{TRUE}).  Note that no such scaling is performed when a model
 ##' contains more than one residual variance parameter, and the
@@ -38,8 +38,8 @@
 ##' summary object), are highlighted on the plot by a short vertical
 ##' bar through the plotted parameter.
 ##'
-##' When two models are specified in the \code{replot} call, these are
-##' termed the 'current' and 'previous' models. \code{replot} aims to
+##' When two models are specified in the \code{repeplot} call, these are
+##' termed the 'current' and 'previous' models. \code{repeplot} aims to
 ##' highlight the changes in the parameter estimates in moving from
 ##' the previous to the current model.
 ##'
@@ -60,25 +60,25 @@
 ##' specification between 'previous' and 'current' models, can
 ##' sometimes result in an equivalent parameter being given
 ##' \emph{different labels} by \code{\link{asreml}} between the two
-##' models.  \code{replot} cannot detect such cases, and hence will
+##' models.  \code{repeplot} cannot detect such cases, and hence will
 ##' plot the affected parameter as two distinct parameters - one
 ##' removed from the previous model, the other added to the current.
 ##'
 ##' Not all random effects parameters are variances, and as such may
 ##' have different scales to the variances.  Autocorrelation
 ##' estimates, for example, lie between -1 and 1, and have no
-##' relationship to the scale of the variances.  \code{replot} does
+##' relationship to the scale of the variances.  \code{repeplot} does
 ##' not attempt to distinguish between parameters on different scales,
 ##' and if you wish to 'zoom in' on a particular range of parameter
 ##' values to see the estimates clearly, you can do so using the usual
 ##' \pkg{ggplot2} \code{xlim} function syntax,
-##' e.g. \code{replot(a1,a0) + xlim(-1,1)}.
+##' e.g. \code{repeplot(a1,a0) + xlim(-1,1)}.
 ##'
-##' \code{replot} requires that the \pkg{asreml}, \pkg{dplyr} and
-##' \pkg{ggplot2} packages be installed.  \code{replot} returns a
+##' \code{repeplot} requires that the \pkg{asreml}, \pkg{dplyr} and
+##' \pkg{ggplot2} packages be installed.  \code{repeplot} returns a
 ##' \code{\link{ggplot}} object, and this object can be further
 ##' modified using the usual \pkg{ggplot2} package
-##' syntax. \code{replot} uses the \code{\link{theme_bw}} theme by
+##' syntax. \code{repeplot} uses the \code{\link{theme_bw}} theme by
 ##' default.
 ##'
 ##' @title Plot \pkg{asreml} random model parameters
@@ -123,7 +123,7 @@
 ##' @import ggplot2
 ##' @import asreml
 ##'
-replot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
+repeplot <- function(curr,prev=NULL,gammas=TRUE,size=6,lwd=2,
                    zline=TRUE,rlines=TRUE,
                    bw=FALSE,
                    pointcol=ifelse(bw,"grey50","#0072B2"),

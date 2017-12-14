@@ -1,11 +1,11 @@
-Package: asremlREplot
+Package: repeplot
 Type: Package
-Title: Plot asreml model random effects parameter estimates
-Version: 0.0.1
+Title: Plot asreml model Random Effects Parameter Estimates (REPE)
+Version: 0.0.2
 Date: 2016-01-21
 Author: Alexander Zwart
 Maintainer: Alexander Zwart <Alec.Zwart@csiro.au>
-Description: Provides a function 'replot' which plots fitted
+Description: Provides a function 'repeplot' which plots fitted
     random effects parameter estimates for one or two asreml
     models - the latter allowing assessment of the changes in
     variance parameters between models.
@@ -16,4 +16,4 @@ Imports:
     dplyr,
     ggplot2,
     asreml
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1
